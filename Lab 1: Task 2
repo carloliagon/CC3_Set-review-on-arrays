@@ -1,0 +1,51 @@
+// John Carlo M. Liagon
+// January 17, 2025
+// Lab 1: task 2
+
+import javax.swing.JOptionPane;
+
+public class PizzaChoice {
+    public static void main(String[] args){
+        String[] pizzaSizes = {"S", "M", "L", "X"};
+        double[] pizzaPrices = {6.99, 8.99, 12.50, 15.00};
+        boolean tryAgain = true;
+        
+        while (tryAgain){
+            String input = JOptionPane.showInputDialog(null, "Enter Pizza Size ( S, M, L, X):", "Pizza Choice", JOptionPane.QUESTION_MESSAGE);
+            
+            if (input == null){ // Handle case where the user cancels the dialog
+                break;
+            }
+            input = input.toUpperCase();
+            boolean validChoice = false;
+            for (int i = 0; i <pizzaSizes.length; i++){
+                if (pizzaSizes[i].equals(input)){
+                    JOptionPane.showMessageDialog(null,"The price of a " + getSizeDescription(input) + "pizza is $" + pizzaPrices[i] + ".","Pizza Prices", JOptionPane.INFORMATION_MESSAGE);
+                    validChoice = true;
+                    break;
+                }
+            }
+            if(!validChoice){
+                JOptionPane.showMessageDialog(null, "Invalid pizza size. Please enter S, M, L, or X.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to try again?", "Try Again", JOptionPane.YES_NO_OPTION);
+            if (response != JOptionPane.YES_NO_OPTION){
+             tryAgain = false;   
+            }
+        }
+    }
+    private static String getSizeDescription(String size) {
+        switch (size) {
+            case "S":
+                return "small";
+            case "M":
+                return "medium";
+            case "L":
+                return "large"; 
+            case "X":
+                return "extra-large";
+            default:
+                return " unkown";
+        }
+    }
+}
